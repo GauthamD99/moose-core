@@ -13,21 +13,21 @@
 
 const Cinfo* GradSyn::initCinfo()
 {
-    static ValueFinfo<GradSyn, float> Tau(
+    static ValueFinfo<GradSyn, double> Tau(
         "tau",
         "Decay time constant for the synaptic conductance",
         &GradSyn::setTau, 
         &GradSyn::getTau
     );
 
-    static ValueFinfo<GradSyn, float> Vmid(
+    static ValueFinfo<GradSyn, double> Vmid(
         "Vmid",
         "The voltage at which s_inf becomes 0.5",
         &GradSyn::setVmid,
         &GradSyn::getVmid
     );    
 
-    static ValueFinfo<GradSyn, float> Slope(
+    static ValueFinfo<GradSyn, double> Slope(
         "Slope",
         "It decides the slope of the sigmoid",
         &GradSyn::setSlope,
@@ -81,46 +81,42 @@ GradSyn::GradSyn()
       Slope_(1e-3),
       Vpre_(0.0),
       dt_(25.0e-6)
-{
-    ; 
-}
+{ ; }
 
 GradSyn::~GradSyn()
-{
-    ;
-}
+{;}
  
 void GradSyn::vSetGbar(const Eref& e, double Gbar)
 {
     ChanCommon::vSetGbar(e, Gbar);
 }
 
-void GradSyn::setTau(float Tau) 
+void GradSyn::setTau(double Tau) 
 {
     Tau_ = Tau;
 }
 
-float GradSyn::getTau() const 
+double GradSyn::getTau() const 
 {
     return Tau_;
 }
 
-void GradSyn::setVmid(float Vmid) 
+void GradSyn::setVmid(double Vmid) 
 {
     Vmid_ = Vmid;
 }
 
-float GradSyn::getVmid() const 
+double GradSyn::getVmid() const 
 {
     return Vmid_;
 }
 
-void GradSyn::setSlope(float Slope) 
+void GradSyn::setSlope(double Slope) 
 {
     Slope_ = Slope;
 }
 
-float GradSyn::getSlope() const 
+double GradSyn::getSlope() const 
 {
     return Slope_;
 }
@@ -149,4 +145,8 @@ void GradSyn::vReinit(const Eref& e, ProcPtr info)
     s_inf=0.0;
     s_=0.0;
     sendReinitMsgs(e,info);
+}
+void GradSyn:: Vpre(double val)
+{
+    Vpre_=val;
 }

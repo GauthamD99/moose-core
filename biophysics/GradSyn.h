@@ -12,14 +12,14 @@ public :
     /////////////////////////////////////////////////////////////
         // Value field access function definitions
         /////////////////////////////////////////////////////////////
-    void setTau(float Tau);
-    float getTau() const;
+    void setTau(double Tau);
+    double getTau() const;
 
-    void setVmid(float Vmid);
-    float getVmid() const;
+    void setVmid(double Vmid);
+    double getVmid() const;
 
-    void setSlope(float Slope);
-    float getSlope() const;
+    void setSlope(double Slope);
+    double getSlope() const;
 
     void vSetGbar( const Eref& e, double Gbar ); 
 
@@ -36,9 +36,9 @@ public :
 
 
     protected:
-        float Tau_;
-        float Vmid_;
-        float Slope_;
+        double Tau_;
+        double Vmid_;
+        double Slope_;
         double Vpre_;
         double dt_;
         double s_inf;

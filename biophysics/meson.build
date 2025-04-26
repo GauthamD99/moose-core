@@ -47,7 +47,8 @@ biophysics_src = ['IntFire.cpp',
                   'VClamp.cpp',
                   'Spine.cpp',
                   'MarkovOdeSolver.cpp',
-                  'testBiophysics.cpp']
+                  'testBiophysics.cpp',
+                  'GradSyn.cpp']
 
 include_directories = ['../external/exprtk']
 include_directories += gsl_dep.get_variable(pkgconfig:'includedir')

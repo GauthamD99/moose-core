@@ -911,6 +911,7 @@ void Clock::buildDefaultTick()
     defaultTick_["SymCompartment"] = 3; // Uses 'init'
     defaultTick_["ChanBase"] = 4;
     defaultTick_["SynChan"] = 4;
+    defaultTick_["GradSyn"] = 4;
     defaultTick_["NMDAChan"] = 4;
     defaultTick_["GapJunction"] = 4;
     defaultTick_["HHChannel"] = 4;
