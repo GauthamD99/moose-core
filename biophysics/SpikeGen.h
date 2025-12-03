@@ -32,7 +32,7 @@ class SpikeGen
 		double getState() const;
 		*/
 
-        bool getFired() const;
+        double getFired() const;
         double getLastSpikeTime() const;
         void setEdgeTriggered( bool yes);
         bool getEdgeTriggered() const;

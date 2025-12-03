@@ -66,7 +66,7 @@ const Cinfo* SpikeGen::initCinfo()
 		&SpikeGen::setRefractT,
 		&SpikeGen::getRefractT
 	);
-	static ReadOnlyValueFinfo< SpikeGen, bool > hasFired( "hasFired",
+	static ReadOnlyValueFinfo< SpikeGen, double > hasFired( "hasFired",
 		"True if SpikeGen has just fired",
 		&SpikeGen::getFired
 	);
@@ -176,7 +176,7 @@ double SpikeGen::getState() const
 }
 */
 
-bool SpikeGen::getFired() const
+double SpikeGen::getFired() const
 {
 	return fired_;
 }
