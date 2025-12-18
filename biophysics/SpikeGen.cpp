@@ -19,6 +19,12 @@ static SrcFinfo1< double > *spikeOut() {
 	return &spikeOut;
 }
 
+static SrcFinfo1<double> *spikeFlag() {
+	static SrcFinfo1<double > spikeFlag("spikeFlag",
+			"Sends out a flag for an event.");
+	return &spikeFlag;
+}
+	
 const Cinfo* SpikeGen::initCinfo()
 {
 	///////////////////////////////////////////////////////
@@ -89,6 +95,7 @@ const Cinfo* SpikeGen::initCinfo()
 	static Finfo* spikeGenFinfos[] =
 	{
 		spikeOut(),	// SrcFinfo
+		spikeFlag(),	// SrcFinfo
 		&proc,		// Shared
 		&Vm,		// Dest
 		&threshold,	// Value
@@ -206,15 +213,24 @@ void SpikeGen::process( const Eref& e, ProcPtr p )
 		if ((t + p->dt/2.0) >= (lastEvent_ + refractT_)) {
 			if ( !( edgeTriggered_ && fired_ ) ) {
 				spikeOut()->send( e, t );
+				spikeFlag()->send( e, 1.0 );
 				lastEvent_ = t;
 				fired_ = true;
 			}
+			else {
+			spikeFlag()->send( e, 0.0 );
+			}
 		}
-	} else {
-            fired_ = false;
+		else{
+			spikeFlag()->send( e, 0.0 );
+		} 
 	}
-}
+	else {
+			fired_ = false;
+			spikeFlag()->send( e, 0.0 );
+	}
 
+}
 // Set it so that first spike is allowed.
 void SpikeGen::reinit( const Eref& e, ProcPtr p )
 {
